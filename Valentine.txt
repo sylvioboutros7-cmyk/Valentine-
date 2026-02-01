@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Be My Valentine 💖</title>
+
+<style>
+    body {
+        margin: 0;
+        height: 100vh;
+        background: linear-gradient(135deg, #ff5f9e, #ffc3d9);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: 'Comic Sans MS', cursive, sans-serif;
+        overflow: hidden;
+    }
+
+    .container {
+        text-align: center;
+        z-index: 2;
+    }
+
+    h1 {
+        color: white;
+        font-size: 2.5rem;
+        margin-bottom: 40px;
+        text-shadow: 2px 2px 8px rgba(0,0,0,0.2);
+    }
+
+    .buttons {
+        position: relative;
+        height: 100px;
+    }
+
+    button {
+        padding: 15px 30px;
+        font-size: 1.2rem;
+        border: none;
+        border-radius: 30px;
+        cursor: pointer;
+        position: absolute;
+        transition: all 0.3s ease;
+    }
+
+    #yes {
+        background-color: #ff2e7a;
+        color: white;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    #no {
+        background-color: #555;
+        color: white;
+        right: 20%;
+        pointer-events: none;
+    }
+
+    /* Floating hearts */
+    .heart {
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        background: red;
+        transform: rotate(45deg);
+        animation: float 6s infinite ease-in;
+        opacity: 0.7;
+    }
+
+    .heart::before,
+    .heart::after {
+        content: '';
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        background: red;
+        border-radius: 50%;
+    }
+
+    .heart::before {
+        top: -10px;
+        left: 0;
+    }
+
+    .heart::after {
+        left: -10px;
+        top: 0;
+    }
+
+    @keyframes float {
+        0% {
+            bottom: -10%;
+            opacity: 0;
+        }
+        50% {
+            opacity: 0.8;
+        }
+        100% {
+            bottom: 110%;
+            opacity: 0;
+        }
+    }
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h1>Clarita 💕<br>Will You Be My Valentine Babe?</h1>
+
+    <div class="buttons">
+        <button id="yes" onclick="yesClicked()">YES 💖</button>
+        <button id="no">NO 😢</button>
+    </div>
+</div>
+
+<script>
+    // Grow YES button every 3 seconds
+    let scale = 1;
+    setInterval(() => {
+        scale += 0.15;
+        document.getElementById('yes').style.transform =
+            `translateX(-50%) scale(${scale})`;
+    }, 3000);
+
+    // Move NO button left & right
+    let direction = 1;
+    setInterval(() => {
+        const noBtn = document.getElementById('no');
+        let currentRight = parseInt(noBtn.style.right || 20);
+        if (currentRight > 60) direction = -1;
+        if (currentRight < 10) direction = 1;
+        noBtn.style.right = (currentRight + direction * 10) + '%';
+    }, 500);
+
+    function yesClicked() {
+        alert("YAYYYY 💘💘💘 I KNEW YOU’D SAY YES!!!");
+    }
+
+    // Create floating hearts
+    setInterval(() => {
+        const heart = document.createElement('div');
+        heart.classList.add('heart');
+        heart.style.left = Math.random() * 100 + 'vw';
+        heart.style.animationDuration = (4 + Math.random() * 3) + 's';
+        document.body.appendChild(heart);
+
+        setTimeout(() => heart.remove(), 7000);
+    }, 300);
+</script>
+
+</body>
+</html>
